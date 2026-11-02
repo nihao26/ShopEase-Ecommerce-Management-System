@@ -53,13 +53,20 @@ app.secret_key = os.environ.get(
     "development-secret-key-change-later"
 )
 
+frontend_origins = os.environ.get(
+    "FRONTEND_URL",
+    "http://localhost:5173,http://localhost:3000"
+).split(",")
+
 CORS(
     app,
-    origins=[
-        "http://localhost:5173",
-        "http://localhost:3000"
-    ],
+    origins=frontend_origins,
     supports_credentials=True
+)
+
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_SECURE"] = (
+    os.environ.get("COOKIE_SECURE", "False").lower() == "true"
 )
 
 
@@ -606,4 +613,8 @@ def admin_logout():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
+    )

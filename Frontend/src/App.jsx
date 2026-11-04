@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import "./App.css";
-
+const API_URL = "https://shopease-ecommerce-management-system.onrender.com/";
 function App() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState("home");
@@ -41,7 +41,7 @@ const [deliveryAddress, setDeliveryAddress] = useState("");
 const [paymentMethod, setPaymentMethod] = useState("COD");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch("${API_URL}/api/products")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.log(error));
@@ -51,7 +51,7 @@ const [paymentMethod, setPaymentMethod] = useState("COD");
     event.preventDefault();
 
     const response = await fetch(
-      "http://localhost:5000/api/customer/register",
+      "${API_URL}/api/customer/register",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ const [paymentMethod, setPaymentMethod] = useState("COD");
     event.preventDefault();
 
     const response = await fetch(
-      "http://localhost:5000/api/customer/login",
+      "${API_URL}/api/customer/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -100,7 +100,7 @@ async function handleSellerLogin(event) {
   event.preventDefault();
 
   const response = await fetch(
-    "http://localhost:5000/api/seller/login",
+    "${API_URL}/api/seller/login",
     {
       method: "POST",
       headers: {
@@ -128,7 +128,7 @@ async function handleAdminLogin(event) {
   event.preventDefault();
 
   const response = await fetch(
-    "http://localhost:5000/api/admin/login",
+    "${API_URL}/api/admin/login",
     {
       method: "POST",
       headers: {
@@ -154,7 +154,7 @@ async function handleAdminLogin(event) {
 }
 async function handleViewAdminCustomers() {
   const response = await fetch(
-    "http://localhost:5000/api/admin/customers",
+    "${API_URL}/api/admin/customers",
     { credentials: "include" }
   );
 
@@ -169,7 +169,7 @@ async function handleViewAdminCustomers() {
 
 async function handleViewAdminSellers() {
   const response = await fetch(
-    "http://localhost:5000/api/admin/sellers",
+    "${API_URL}/api/admin/sellers",
     { credentials: "include" }
   );
 
@@ -184,7 +184,7 @@ async function handleViewAdminSellers() {
 
 async function handleViewAdminProducts() {
   const response = await fetch(
-    "http://localhost:5000/api/admin/products",
+    "${API_URL}/api/admin/products",
     { credentials: "include" }
   );
 
@@ -199,7 +199,7 @@ async function handleViewAdminProducts() {
 
 async function handleViewAdminOrders() {
   const response = await fetch(
-    "http://localhost:5000/api/admin/orders",
+    "${API_URL}/api/admin/orders",
     { credentials: "include" }
   );
 
@@ -212,7 +212,7 @@ async function handleViewAdminOrders() {
   }
 }async function handleViewAdminCategories() {
   const response = await fetch(
-    "http://localhost:5000/api/admin/categories",
+    "${API_URL}/api/admin/categories",
     { credentials: "include" }
   );
 
@@ -229,7 +229,7 @@ async function handleAddCategory(event) {
   event.preventDefault();
 
   const response = await fetch(
-    "http://localhost:5000/api/admin/categories",
+    "${API_URL}/api/admin/categories",
     {
       method: "POST",
       headers: {
@@ -255,7 +255,7 @@ async function handleAddCategory(event) {
 
 async function handleDeleteCategory(categoryId) {
   const response = await fetch(
-    `http://localhost:5000/api/admin/categories/${categoryId}`,
+    `${API_URL}/api/admin/categories/${categoryId}`,
     {
       method: "DELETE",
       credentials: "include"
@@ -271,7 +271,7 @@ async function handleDeleteCategory(categoryId) {
 }
 async function handleViewSellerProducts() {
   const response = await fetch(
-    "http://localhost:5000/api/seller/products",
+    "${API_URL}/api/seller/products",
     {
       method: "GET",
       credentials: "include"
@@ -290,7 +290,7 @@ async function handleAddProduct(event) {
   event.preventDefault();
 
   const response = await fetch(
-    "http://localhost:5000/api/seller/products",
+    "${API_URL}/api/seller/products",
     {
       method: "POST",
       headers: {
@@ -325,7 +325,7 @@ async function handleUpdateProduct(event) {
   event.preventDefault();
 
   const response = await fetch(
-    `http://localhost:5000/api/seller/products/${editingProductId}`,
+    `${API_URL}/api/seller/products/${editingProductId}`,
     {
       method: "PUT",
       headers: {
@@ -359,7 +359,7 @@ async function handleUpdateProduct(event) {
 }
 async function handleDeleteProduct(productId) {
   const response = await fetch(
-    `http://localhost:5000/api/seller/products/${productId}`,
+    `${API_URL}/api/seller/products/${productId}`,
     {
       method: "DELETE",
       credentials: "include"
@@ -384,7 +384,7 @@ function handleEditProduct(product) {
 }
 async function handleViewSellerOrders() {
   const response = await fetch(
-    "http://localhost:5000/api/seller/orders",
+    "${API_URL}/api/seller/orders",
     {
       method: "GET",
       credentials: "include"
@@ -401,7 +401,7 @@ async function handleViewSellerOrders() {
 }
 async function handleUpdateOrderStatus(orderId, status) {
   const response = await fetch(
-    `http://localhost:5000/api/seller/orders/${orderId}/status`,
+    `${API_URL}/api/seller/orders/${orderId}/status`,
     {
       method: "PUT",
       headers: {
@@ -422,7 +422,7 @@ async function handleUpdateOrderStatus(orderId, status) {
 }
 async function handleAddToCart(productId) {
   const response = await fetch(
-    "http://localhost:5000/api/cart/add",
+    "${API_URL}/api/cart/add",
     {
       method: "POST",
       headers: {
@@ -442,7 +442,7 @@ async function handleAddToCart(productId) {
 
 async function handleViewCart() {
   const response = await fetch(
-    "http://localhost:5000/api/cart",
+    "${API_URL}/api/cart",
     {
       method: "GET",
       credentials: "include"
@@ -462,7 +462,7 @@ async function handleViewCart() {
 }
 async function handleViewOrders() {
   const response = await fetch(
-    "http://localhost:5000/api/orders",
+    "${API_URL}/api/orders",
     {
       method: "GET",
       credentials: "include"
@@ -481,7 +481,7 @@ async function handleViewOrders() {
 }
 async function handleUpdateCart(productId, quantity) {
   const response = await fetch(
-    "http://localhost:5000/api/cart/update",
+    "${API_URL}/api/cart/update",
     {
       method: "PUT",
       headers: {
@@ -505,7 +505,7 @@ async function handleUpdateCart(productId, quantity) {
 
 async function handleRemoveCart(productId) {
   const response = await fetch(
-    `http://localhost:5000/api/cart/remove/${productId}`,
+    `${API_URL}/api/cart/remove/${productId}`,
     {
       method: "DELETE",
       credentials: "include"
@@ -523,7 +523,7 @@ async function handlePlaceOrder(event) {
   event.preventDefault();
 
   const response = await fetch(
-    "http://localhost:5000/api/orders",
+    "${API_URL}/api/orders",
     {
       method: "POST",
       headers: {
